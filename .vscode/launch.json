@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'png-decoder'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=png-decoder",
+                    "--package=png-decoder"
+                ],
+                "filter": {
+                    "name": "png-decoder",
+                    "kind": "bin"
+                }
+            },
+            "args": ["PNG_Test.png"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'png-decoder'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=png-decoder",
+                    "--package=png-decoder"
+                ],
+                "filter": {
+                    "name": "png-decoder",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
