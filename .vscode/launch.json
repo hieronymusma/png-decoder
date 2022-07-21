@@ -19,7 +19,7 @@
                     "kind": "bin"
                 }
             },
-            "args": ["PNG_Test.png"],
+            "args": ["/home/hieronymusma/Downloads/png/f01n2c08.png"],
             "cwd": "${workspaceFolder}"
         },
         {

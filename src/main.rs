@@ -1,8 +1,9 @@
 use std::error::Error;
 
-use sdl2::{pixels::Color, rect::Point};
+use sdl2::rect::Point;
 
 mod crc;
+mod filter;
 mod png;
 mod sdl;
 
@@ -19,19 +20,18 @@ fn main() -> Res<()> {
 }
 
 fn process(png: &[u8]) -> Res<()> {
-    png::process(png)?;
+    let png = png::process(png)?;
+    let width = png.get_width();
+    let height = png.get_height();
 
-    let mut canvas = sdl::SDLWindow::new(800, 600)?;
+    let mut canvas = sdl::SDLWindow::new(width, height)?;
 
-    for h in 0..600 {
-        for w in 0..800 {
-            let c = match h % 12 {
-                0..=3 => Color::RGB(255, 0, 0),
-                4..=7 => Color::RGB(0, 255, 0),
-                8..=11 => Color::RGB(0, 0, 255),
-                _ => panic!(),
-            };
-            canvas.draw_point(c, Point::new(w, h))?;
+    let image_data = png.get_data();
+
+    for h in 0..height {
+        for w in 0..width {
+            let pixel = &image_data[h as usize][w as usize];
+            canvas.draw_point(pixel.to_color(), Point::new(w as i32, h as i32))?;
         }
     }
 
